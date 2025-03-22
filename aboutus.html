@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <title>About Us | FindHotel</title>
+    <style>
+        /* Reset Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+        body {
+            background-image: url('img/images.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 100px 20px;
+            position: relative;
+            overflow: hidden;
+            color: #ffffff;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            transition: background 0.3s;
+        }
+
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-decoration: overline;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin: 0 15px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .nav-links a:hover {
+            color: #6ef0ff;
+        }
+
+        .nav-links a.active {
+            color: #6ef0ff;
+            text-decoration: underline;
+        }
+
+        .menu-icon {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background: rgba(0, 0, 0, 0.8);
+                position: absolute;
+                top: 60px;
+                left: 0;
+                z-index: 1000;
+            }
+
+            .nav-links li {
+                margin: 10px 0;
+                text-align: center;
+            }
+
+            .menu-icon {
+                display: block;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+        }
+
+        /* About Us Section */
+        .about-container {
+            max-width: 900px;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(16px);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+
+        .about-container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h1 {
+            font-size: 38px;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        p {
+            font-size: 16px;
+            font-weight: normal;
+            line-height: 1.8;
+        }
+
+        /* Typing Animation */
+        .animated-text {
+            font-size: 26px;
+            font-weight: bold;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 2px solid white;
+            width: 0;
+            animation: typing 4s steps(40) forwards, blink 0.8s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        @media (max-width: 768px) {
+            .about-container {
+                max-width: 400px;
+                background: rgba(0, 0, 0, 0.5);
+                backdrop-filter: blur(16px);
+                padding: 50px;
+                border-radius: 20px;
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+                opacity: 0;
+                transform: translateY(30px);
+                transition: opacity 1s ease-out, transform 1s ease-out;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">FINDHOTEL</div>
+        <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+        <ul class="nav-links">
+            <li><a href="homepage.html">Home</a></li>
+            <li><a href="aboutus.html" class="active">About Us</a></li>
+            <li><a href="hotels.html">Hotels</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <!-- About Us Section -->
+    <div class="about-container" id="about">
+        <h1>About Us</h1>
+        <p class="animated-text">Welcome to FindHotel, your best hotel booking companion.</p>
+        <p>
+            At <strong>FindHotel</strong>, we believe that finding the perfect place to stay should be seamless, exciting, 
+            and stress-free.
+        </p>
+        <p>Our platform is designed to help travelers discover the best hotels, resorts, and unique accommodations.</p>
+        <p>
+            Our mission is to make travel more accessible and enjoyable for everyone. Join us in discovering 
+            new places and making unforgettable memories with **<strong>FindHotel</strong>**!
+        </p>
+    </div>
+
+    <script>
+
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        }
+        // Scroll-triggered animation
+        document.addEventListener("DOMContentLoaded", function () {
+            const aboutSection = document.getElementById("about");
+
+            function revealSection() {
+                let position = aboutSection.getBoundingClientRect().top;
+                let screenPosition = window.innerHeight / 1.2;
+
+                if (position < screenPosition) {
+                    aboutSection.classList.add("visible");
+                }
+            }
+
+            window.addEventListener("scroll", revealSection);
+            revealSection();
+        });
+    </script>
+</body>
+</html>

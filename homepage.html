@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <title>Luxury Hotel Experience</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            transition: background 0.3s;
+        }
+
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-decoration: overline;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin: 0 15px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .nav-links a:hover {
+            color: #6ef0ff;
+        }
+
+        .nav-links a.active {
+            color: #6ef0ff;
+            text-decoration: underline;
+        }
+
+        .menu-icon {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background: rgba(0, 0, 0, 0.8);
+                position: absolute;
+                top: 60px;
+                left: 0;
+                z-index: 1000;
+            }
+
+            .nav-links li {
+                margin: 10px 0;
+                text-align: center;
+            }
+
+            .menu-icon {
+                display: block;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+        }
+
+        /* Hero Section with Carousel */
+        .carousel-container {
+            position: fixed;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+        }
+
+        /* Overlay */
+        .overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            flex-direction: column;
+        }
+
+        .overlay h1 {
+            font-size: 60px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            font-weight: bold;
+            padding: 12px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.652);
+            animation: fadeIn 1.2s ease-in-out;
+        }
+
+        .overlay p {
+            font-size: 24px;
+            max-width: 600px;
+            padding: 12px 30px;
+            border-radius: 10px;
+        }
+
+        /* Hotel Details */
+        .hotel-details {
+            padding: 60px 20px;
+            text-align: center;
+            background: white;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin: -50px auto 50px;
+            max-width: 80%;
+        }
+
+        .hotel-details h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .hotel-gallery {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .hotel-gallery img {
+            width: 300px;
+            height: 180px;
+            border-radius: 12px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .hotel-gallery img:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #13c9dd, #6ef0ff);
+            color: rgb(0, 0, 0);
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: underline;
+            border-radius: 20px;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            margin-top: 50px;
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, #6ef0ff, #13c9dd);
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+@media (max-width: 768px) {
+    .navbar .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        position: absolute;
+        top: 60px;
+        left: 0;
+        z-index: 1000;
+    }
+
+    .navbar .nav-links li {
+        margin: 10px 0;
+        text-align: center;
+    }
+
+    .navbar .menu-icon {
+        display: block;
+    }
+
+    .navbar .nav-links.active {
+        display: flex;
+    }
+}
+
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">FINDHOTEL</div>
+        <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+        <ul class="nav-links">
+            <li><a href="homepage.html" class="active">Home</a></li>
+            <li><a href="aboutus.html">About Us</a></li>
+            <li><a href="hotels.html">Hotels</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <!-- Carousel Section -->
+    <section class="carousel-container">
+        <div class="carousel-slide active" style="background-image: url('img/seda-capitol-central.jpg');"></div>
+        <div class="carousel-slide" style="background-image: url('img/l-fisher-hotel.jpg');"></div>
+        <div class="carousel-slide" style="background-image: url('img/park-inn-by-radisson.jpg');"></div>
+        <div class="overlay">
+            <h1>Welcome to FINDHOTEL</h1>
+            <p>Experience luxury and comfort with the best hotels in Negros Occidental.</p>
+            <a class="btn" href="hotels.html">Find Hotels Here</a>
+        </div>
+    </section>
+
+    <script>
+        // Carousel JavaScript
+        let slides = document.querySelectorAll('.carousel-slide');
+        let currentIndex = 0;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                if (i === index) {
+                    slide.classList.add('active');
+                }
+            });
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % slides.length;
+            showSlide(currentIndex);
+        }
+
+        setInterval(nextSlide, 3000);
+
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
